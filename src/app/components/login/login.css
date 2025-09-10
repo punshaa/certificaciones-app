@@ -1,145 +1,223 @@
+/* Login Container - Main Layout */
 .login-container {
   display: flex;
-  min-height: 100vh;
-  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 0px 0px 40px;
+  gap: 43px;
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+  background: #FFFFFF;
   margin: 0;
-  padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Panel izquierdo - Formulario */
+/* Main Frame */
+.main-frame {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 43px;
+  isolation: isolate;
+  width: 1400px;
+  height: 1024px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Left Panel - Form - Desplazado más hacia la izquierda */
 .left-panel {
-  flex: 0 0 50%;
-  background: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 80px;
-  position: relative;
-  z-index: 10;
+  justify-content: center; /* Centrado vertical */
+  align-items: flex-start; /* Alineado a la izquierda */
+  padding: 80px 100px 80px 20px; /* Más padding derecho, menos izquierdo para desplazar hacia la izquierda */
+  gap: 40px; /* Reducido gap para mejor distribución */
+  width: 400px; /* Aumentado ancho del panel */
+  height: 607.18px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  z-index: 0;
 }
 
-/* Panel derecho - Imagen de fondo */
-.right-panel {
-  flex: 0 0 50%;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Logo NTT DATA */
+/* Logo Container - Más grande */
 .logo-container {
-  margin-bottom: 40px;
-  align-self: flex-start;
-}
-
-.ntt-logo {
+  width: 335.49px;
+  height: 110.18px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
   display: flex;
+  justify-content: center; /* Centrar logo */
   align-items: center;
-  gap: 12px;
 }
 
-.ntt-n {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ntt-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.ntt-n svg {
-  width: 40px;
-  height: 40px;
-}
-
-.ntt-text {
-  color: #2563eb;
-  font-weight: 700;
-  font-size: 28px;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.5px;
-}
-
-/* Saludo */
+/* Greeting - Ancho suficiente para una línea completa */
 .greeting {
-  color: #1e293b;
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 50px;
-  align-self: flex-start;
+  width: auto; /* Cambiado de 106px fijo a auto */
+  min-width: 150px; /* Ancho mínimo para evitar cortes */
+  height: 33px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700; /* Bold */
+  font-size: 28px; /* Aumentado de 24px */
+  line-height: 38px; /* Ajustado para el nuevo tamaño */
+  color: #091351;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 20px 0 30px 0; /* Aumentado: 20px arriba, 30px abajo */
+  text-align: left; /* Alineado a la izquierda como en la imagen */
+  align-self: flex-start; /* Forzar alineación a la izquierda */
+  white-space: nowrap; /* Evitar salto de línea */
 }
 
-/* Formulario */
+/* Login Form - Ancho aumentado para mejor uso del espacio */
 .login-form {
-  width: 100%;
-  max-width: 400px;
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px; /* Ajustado para mejor distribución */
+  width: 360px; /* Aumentado de 328px */
+  height: auto; /* Cambiado de 192px fijo */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  align-self: flex-start; /* Forzar alineación a la izquierda */
 }
 
+/* Form Group - Ancho aumentado */
 .form-group {
-  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px; /* Espaciado entre label e input */
+  width: 360px; /* Aumentado de 328px */
+  height: auto;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #374151;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 16px 20px;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  background: #ffffff;
-  color: #1f2937;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.form-group input.error {
-  border-color: #dc2626;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-}
-
-.required-text {
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 6px;
+/* Field Label - Siempre visible arriba */
+.field-label {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
   font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #5C5C5C;
+  letter-spacing: 0.4px;
+  margin: 0;
+  padding: 0;
 }
 
-/* Botón de login */
-.login-button {
-  width: 100%;
+.field-label.error {
+  color: #DB4042;
+}
+
+/* Form Input - Ancho aumentado con borde gris por defecto */
+.form-input {
+  box-sizing: border-box;
+  width: 360px; /* Aumentado de 328px */
+  height: 56px;
+  background: #FFFFFF;
+  border: 1px solid #858585; /* Gris claro por defecto */
+  border-radius: 8px;
   padding: 16px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #303030;
+  letter-spacing: 0.2px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+/* FOCUS: Borde azul cuando está seleccionado */
+.form-input:focus {
+  border-color: #1D65B3; /* Azul según especificaciones */
+  border-width: 2px; /* Borde más grueso en focus */
+}
+
+/* ERROR: Borde rojo cuando hay error */
+.form-input.error {
+  border-color: #DB4042; /* Rojo para errores */
+  border-width: 1px;
+}
+
+.form-input::placeholder {
+  color: #5C5C5C;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.form-input.error::placeholder {
+  color: #DB4042;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Required Text */
+.required-text {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #303030;
+  letter-spacing: 0.4px;
+  margin: 0;
+  padding: 0;
+}
+
+.required-text.error {
+  color: #DB4042;
+}
+
+/* Login Button - Ancho aumentado con texto en negrita */
+.login-button {
+  width: 360px; /* Aumentado de 335.49px */
+  height: 64px; /* Aumentado de 56px para más altura */
+  background: #E0E0E0; /* Color gris más oscuro */
   border: none;
   border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 700; /* Bold */
+  font-size: 18px;
+  line-height: 28px;
+  color: #303030; /* Color gris más oscuro, casi negro */
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 32px;
-  background: #d1d5db;
-  color: #9ca3af;
+  flex: none;
+  order: 3;
+  align-self: flex-start; /* Alineado a la izquierda */
+  flex-grow: 0;
+  padding: 18px 32px; /* Más padding vertical */
 }
 
 .login-button.active {
-  background: #2563eb;
-  color: white;
+  background: #1D65B3;
+  color: #FFFFFF;
 }
 
-.login-button.active:hover {
-  background: #1d4ed8;
+.login-button:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .login-button:disabled {
@@ -148,151 +226,227 @@
   box-shadow: none;
 }
 
-/* Mensaje de error */
+/* Error Message - Ancho ajustado */
 .error-message {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
   padding: 12px 16px;
   border-radius: 8px;
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
-  margin-bottom: 20px;
-  text-align: center;
   font-weight: 500;
+  margin: 0;
+  text-align: center;
+  width: 360px; /* Aumentado de 335.49px */
+  box-sizing: border-box;
+  flex: none;
+  order: 4;
+  align-self: flex-start; /* Alineado a la izquierda */
+  flex-grow: 0;
 }
 
-/* Enlaces */
+/* Form Links - Centrados con ancho ajustado */
 .form-links {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  justify-content: center;
+  align-items: center; /* Centrados horizontalmente */
+  padding: 0px;
+  gap: 8px; /* Aumentado de 6px */
+  width: 360px; /* Aumentado de 335.49px */
+  height: auto; /* Cambiado de 44px fijo */
+  flex: none;
+  order: 5; /* Cambiado de 4 a 5 para acomodar el error message */
+  align-self: flex-start; /* Alineado a la izquierda */
+  flex-grow: 0;
 }
 
-.form-links a {
-  color: #6b7280;
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.2s ease;
+.forgot-password {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
   font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #797A7C;
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.2s ease;
 }
 
-.form-links a:hover {
-  color: #2563eb;
+.forgot-password:hover {
+  color: #1D65B3;
 }
 
-/* Imagen de fondo del panel derecho */
-.background-image {
-  width: 100%;
-  height: 100%;
-  background-image: 
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="cityGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%230f172a;stop-opacity:1" /><stop offset="50%" style="stop-color:%231e293b;stop-opacity:1" /><stop offset="100%" style="stop-color:%23334155;stop-opacity:1" /></linearGradient><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><rect width="1200" height="800" fill="url(%23cityGradient)"/><rect x="0" y="600" width="1200" height="200" fill="%23000000" opacity="0.6"/><rect x="50" y="550" width="20" height="50" fill="%23fbbf24" opacity="0.9"/><rect x="100" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="150" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><rect x="200" y="500" width="20" height="100" fill="%23fbbf24" opacity="0.9"/><rect x="250" y="450" width="35" height="150" fill="%23fbbf24" opacity="0.6"/><rect x="300" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="350" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><rect x="400" y="500" width="20" height="100" fill="%23fbbf24" opacity="0.9"/><rect x="450" y="450" width="35" height="150" fill="%23fbbf24" opacity="0.6"/><rect x="500" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="550" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><rect x="600" y="500" width="20" height="100" fill="%23fbbf24" opacity="0.9"/><rect x="650" y="450" width="35" height="150" fill="%23fbbf24" opacity="0.6"/><rect x="700" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="750" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><rect x="800" y="500" width="20" height="100" fill="%23fbbf24" opacity="0.9"/><rect x="850" y="450" width="35" height="150" fill="%23fbbf24" opacity="0.6"/><rect x="900" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="950" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><rect x="1000" y="500" width="20" height="100" fill="%23fbbf24" opacity="0.9"/><rect x="1050" y="450" width="35" height="150" fill="%23fbbf24" opacity="0.6"/><rect x="1100" y="520" width="25" height="80" fill="%23fbbf24" opacity="0.8"/><rect x="1150" y="480" width="30" height="120" fill="%23fbbf24" opacity="0.7"/><circle cx="200" cy="300" r="3" fill="%23fbbf24" opacity="0.8"/><circle cx="400" cy="280" r="2" fill="%23fbbf24" opacity="0.9"/><circle cx="600" cy="320" r="4" fill="%23fbbf24" opacity="0.7"/><circle cx="800" cy="290" r="3" fill="%23fbbf24" opacity="0.8"/><circle cx="1000" cy="310" r="2" fill="%23fbbf24" opacity="0.9"/></svg>');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  filter: blur(1px);
+.privacy-link {
+  font-family: 'Nunito Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #797A7C;
+  text-decoration: none;
+  text-align: center;
+  transition: color 0.2s ease;
 }
 
-/* Forma abstracta de N */
-.abstract-n {
+.privacy-link:hover {
+  color: #1D65B3;
+}
+
+/* Right Panel - Background Image - Ajustado para mayor separación */
+.right-panel {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 60%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  clip-path: polygon(30% 0%, 100% 0%, 70% 100%, 0% 100%);
-  z-index: 2;
-}
-
-/* Efecto de bokeh adicional */
-.background-image::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 50%);
+  width: calc(100vw - 520px); /* Aumentado separación del panel izquierdo */
+  height: 1024px;
+  left: 520px; /* Movido más hacia la derecha para mayor separación */
+  top: 0px;
+  right: 0px; /* Asegurar que toque el borde derecho */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
   z-index: 1;
 }
 
-/* Responsive */
+.background-image {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/Imagen3 1 (1).svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Responsive Design */
+@media (max-width: 1440px) {
+  .login-container {
+    width: 100%;
+    padding: 0px 0px 0px 20px;
+  }
+  
+  .main-frame {
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .right-panel {
+    left: 450px; /* Ajustado para mayor separación */
+    width: calc(100vw - 450px); /* Tocar el borde derecho */
+    right: 0px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .login-container {
+    padding: 0px 0px 0px 20px;
+    gap: 20px;
+  }
+  
   .left-panel {
-    padding: 40px 60px;
+    width: 350px; /* Ajustado para responsive */
+    gap: 35px; /* Ajustado para responsive */
+    padding: 60px 80px 60px 20px; /* Ajustado para responsive con más separación */
   }
   
-  .greeting {
-    font-size: 28px;
+  .logo-container {
+    width: 300px;
   }
   
-  .ntt-text {
-    font-size: 24px;
+  .login-form {
+    width: 320px; /* Ajustado para responsive */
+    gap: 20px;
+  }
+  
+  .form-group {
+    width: 320px; /* Ajustado para responsive */
+  }
+  
+  .form-input {
+    width: 320px; /* Ajustado para responsive */
+  }
+  
+  .login-button {
+    width: 320px; /* Ajustado para responsive */
+  }
+  
+  .form-links {
+    width: 320px; /* Ajustado para responsive */
+  }
+  
+  .error-message {
+    width: 320px; /* Ajustado para responsive */
+  }
+  
+  .right-panel {
+    left: 430px; /* Ajustado para responsive con mayor separación */
+    width: calc(100vw - 430px); /* Tocar el borde derecho */
+    right: 0px;
   }
 }
 
 @media (max-width: 768px) {
-  .login-container {
+  .main-frame {
     flex-direction: column;
+    height: auto;
   }
   
   .left-panel {
-    flex: 1;
-    padding: 40px 30px;
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+    gap: 30px;
   }
   
   .right-panel {
-    flex: 0 0 40vh;
-    min-height: 300px;
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    order: -1;
+  }
+  
+  .login-container {
+    height: auto;
+    min-height: 100vh;
   }
   
   .greeting {
     font-size: 24px;
-    margin-bottom: 30px;
-  }
-  
-  .ntt-text {
-    font-size: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 24px;
-  }
-  
-  .form-group input {
-    padding: 14px 16px;
-    font-size: 14px;
-  }
-  
-  .login-button {
-    padding: 14px;
-    font-size: 14px;
   }
 }
 
 @media (max-width: 480px) {
   .left-panel {
-    padding: 30px 20px;
+    padding: 20px 10px;
+    gap: 25px;
+  }
+  
+  .logo-container {
+    width: 100%;
+  }
+  
+  .login-form {
+    width: 100%;
+    gap: 18px;
+  }
+  
+  .form-group {
+    width: 100%;
+  }
+  
+  .form-input {
+    width: 100%;
+  }
+  
+  .login-button {
+    width: 100%;
+  }
+  
+  .form-links {
+    width: 100%;
   }
   
   .greeting {
     font-size: 22px;
-    margin-bottom: 25px;
-  }
-  
-  .ntt-text {
-    font-size: 18px;
-  }
-  
-  .form-group input {
-    padding: 12px 14px;
-  }
-  
-  .login-button {
-    padding: 12px;
   }
 }

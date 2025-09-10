@@ -1,75 +1,74 @@
 <div class="login-container">
-  <!-- Panel izquierdo - Formulario -->
-  <div class="left-panel">
-    <!-- Logo NTT DATA -->
-    <div class="logo-container">
-      <div class="ntt-logo">
-        <div class="ntt-n">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M8 8L32 8L32 12L12 12L12 28L8 28L8 8Z" fill="#2563eb"/>
-            <path d="M12 12L36 12L36 16L16 16L16 32L12 32L12 12Z" fill="#2563eb"/>
-          </svg>
-        </div>
-        <div class="ntt-text">NTT DATA</div>
+  <!-- Frame principal -->
+  <div class="main-frame">
+    <!-- Panel izquierdo - Formulario -->
+    <div class="left-panel">
+      <!-- Logo NTT DATA -->
+      <div class="logo-container">
+        <img src="/assets/images/GlobalLogo_NTTDATA_FutureBlue_RGB 1 (2).svg" alt="NTT DATA" class="ntt-logo-image">
       </div>
+
+      <!-- Saludo -->
+      <h1 class="greeting">¡Buen día!</h1>
+
+      <!-- Formulario de login -->
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email" class="field-label">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="Ingresa un email"
+            [class.error]="isFieldInvalid('email')"
+            (input)="onInputChange()"
+            class="form-input"
+          >
+          <div class="required-text">*Campo obligatorio</div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password" class="field-label" [class.error]="isFieldInvalid('password')">Contraseña</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password" 
+            placeholder="Ingresa tu contraseña"
+            [class.error]="isFieldInvalid('password')"
+            (input)="onInputChange()"
+            class="form-input"
+          >
+          <div class="required-text" [class.error]="isFieldInvalid('password')">*Campo obligatorio</div>
+        </div>
+
+        <!-- Login Button -->
+        <button 
+          type="submit" 
+          class="login-button"
+          [class.active]="isFormValid()"
+          [disabled]="!isFormValid()"
+        >
+          Iniciar sesión
+        </button>
+
+        <!-- Mensaje de error -->
+        <div class="error-message" *ngIf="loginError">
+          {{ loginError }}
+        </div>
+
+        <!-- Links -->
+        <div class="form-links">
+          <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+          <a href="#" class="privacy-link">Privacidad y protección de datos</a>
+        </div>
+      </form>
     </div>
 
-    <!-- Saludo -->
-    <h1 class="greeting">¡Buen día!</h1>
-
-    <!-- Formulario de login -->
-    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          formControlName="email" 
-          placeholder="Ingresa un email"
-          [class.error]="isFieldInvalid('email')"
-          (input)="onInputChange()"
-        >
-        <div class="required-text">*Campo obligatorio</div>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input 
-          type="password" 
-          id="password" 
-          formControlName="password" 
-          placeholder="Ingresa tu contraseña"
-          [class.error]="isFieldInvalid('password')"
-          (input)="onInputChange()"
-        >
-        <div class="required-text">*Campo obligatorio</div>
-      </div>
-
-      <button 
-        type="submit" 
-        class="login-button"
-        [class.active]="isFormValid()"
-        [disabled]="!isFormValid()"
-      >
-        Iniciar sesión
-      </button>
-
-      <!-- Mensaje de error -->
-      <div class="error-message" *ngIf="loginError">
-        {{ loginError }}
-      </div>
-
-      <div class="form-links">
-        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-        <a href="#" class="privacy-link">Privacidad y protección de datos</a>
-      </div>
-    </form>
-  </div>
-
-  <!-- Panel derecho - Imagen de fondo -->
-  <div class="right-panel">
-    <div class="background-image">
-      <div class="abstract-n"></div>
+    <!-- Panel derecho - Imagen de fondo -->
+    <div class="right-panel">
+      <div class="background-image"></div>
     </div>
   </div>
 </div>
