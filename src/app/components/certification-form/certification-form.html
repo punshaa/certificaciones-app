@@ -1,0 +1,241 @@
+<div class="app-container">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <main class="main-content" [class.sidebar-collapsed]="sidebarService.isCollapsed()">
+    <div class="certification-form-container">
+      <!-- Header de la página -->
+      <div class="page-header">
+        <h1>Gestión de certificaciones</h1>
+      </div>
+
+      <!-- Formulario de certificación -->
+      <div class="form-section">
+        <h2>Registrar nueva certificación</h2>
+        
+        <form class="certification-form" [formGroup]="certificationForm" (ngSubmit)="onSubmit()">
+          <!-- Información básica -->
+          <div class="form-section-content">
+            <div class="form-group">
+              <label for="name">Nombre *</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name" 
+                placeholder="Ingrese un nombre"
+                [class.error]="isFieldInvalid('name')"
+              >
+              <div class="error-message" *ngIf="isFieldInvalid('name')">
+                Campo obligatorio
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="certifyingBody">Casa certificadora *</label>
+              <select 
+                id="certifyingBody" 
+                formControlName="certifyingBody"
+                [class.error]="isFieldInvalid('certifyingBody')"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="AWS">AWS</option>
+                <option value="Google">Google</option>
+                <option value="Oracle">Oracle</option>
+                <option value="Cisco">Cisco</option>
+              </select>
+              <div class="error-message" *ngIf="isFieldInvalid('certifyingBody')">
+                Campo obligatorio
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="official">Oficial *</label>
+              <select 
+                id="official" 
+                formControlName="official"
+                [class.error]="isFieldInvalid('official')"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Básico">Básico</option>
+                <option value="Intermedio">Intermedio</option>
+                <option value="Avanzado">Avanzado</option>
+                <option value="Experto">Experto</option>
+              </select>
+              <div class="error-message" *ngIf="isFieldInvalid('official')">
+                Campo obligatorio
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="expirationDate">Fecha de caducidad de la certificación *</label>
+              <div class="date-input-container">
+                <input 
+                  type="date" 
+                  id="expirationDate" 
+                  formControlName="expirationDate"
+                  [class.error]="isFieldInvalid('expirationDate')"
+                >
+                <svg class="calendar-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div class="error-message" *ngIf="isFieldInvalid('expirationDate')">
+                Campo obligatorio
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="certificationId">ID de la certificación *</label>
+              <input 
+                type="text" 
+                id="certificationId" 
+                formControlName="certificationId" 
+                placeholder="Ingrese un ID"
+                [class.error]="isFieldInvalid('certificationId')"
+              >
+              <div class="error-message" *ngIf="isFieldInvalid('certificationId')">
+                Campo obligatorio
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="observations">Observaciones</label>
+              <textarea 
+                id="observations" 
+                formControlName="observations" 
+                placeholder="Ingrese observaciones (opcional)"
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Path formativo -->
+          <div class="training-path-section">
+            <h3>Path formativo</h3>
+            
+            <div class="add-path-form">
+              <div class="form-group">
+                <label for="pathName">Nombre</label>
+                <input 
+                  type="text" 
+                  id="pathName" 
+                  [(ngModel)]="newPath.name"
+                  placeholder="Ingrese nombre del path"
+                  name="pathName"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="pathModules">Cantidad de módulos</label>
+                <input 
+                  type="number" 
+                  id="pathModules" 
+                  [(ngModel)]="newPath.modules"
+                  placeholder="0"
+                  name="pathModules"
+                  min="0"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="pathUrl">URL</label>
+                <input 
+                  type="url" 
+                  id="pathUrl" 
+                  [(ngModel)]="newPath.url"
+                  placeholder="https://..."
+                  name="pathUrl"
+                >
+              </div>
+
+              <button 
+                type="button" 
+                class="add-path-btn"
+                (click)="addTrainingPath()"
+                [disabled]="!isPathFormValid()"
+              >
+                Agregar
+              </button>
+            </div>
+
+            <!-- Lista de paths agregados -->
+            <div class="paths-list" *ngIf="trainingPaths.length > 0">
+              <div class="paths-table-container">
+                <table class="paths-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Módulos</th>
+                      <th>URL</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let path of trainingPaths; let i = index">
+                      <td>{{ path.name }}</td>
+                      <td>{{ path.modules }}</td>
+                      <td class="url-cell">
+                        <a [href]="path.url" target="_blank" class="url-link">
+                          {{ path.url }}
+                        </a>
+                      </td>
+                      <td>
+                        <div class="path-actions">
+                          <button class="action-btn edit" (click)="editPath(i)" title="Editar">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="m18.5 2.5 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="action-btn delete" (click)="deletePath(i)" title="Eliminar">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <polyline points="3,6 5,6 21,6"></polyline>
+                              <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Paginación de paths -->
+              <div class="pagination">
+                <div class="pagination-info">
+                  <span>Mostrar por página</span>
+                  <select class="page-size-select" [(ngModel)]="pathPageSize" name="pathPageSize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                  </select>
+                </div>
+                <div class="pagination-controls">
+                  <span class="page-info">{{ getPathPageInfo() }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="form-actions">
+            <button type="button" class="back-btn" (click)="goBack()">
+              Volver atrás
+            </button>
+            <button 
+              type="submit" 
+              class="submit-btn"
+              [class.disabled]="!isFormValid()"
+              [disabled]="!isFormValid()"
+            >
+              Registrar certificación
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,119 @@
+<div class="app-container">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  <main class="main-content" [class.sidebar-collapsed]="sidebarService.isCollapsed()">
+    <div class="certifications-container">
+      <!-- Header de la página -->
+      <div class="page-header">
+        <h1>Gestión de certificaciones</h1>
+        <button class="add-certification-btn" (click)="goToAddCertification()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Agregar certificación
+        </button>
+      </div>
+
+      <!-- Listado de certificaciones -->
+      <div class="certifications-section">
+        <h2>Listado de certificaciones</h2>
+        
+        <!-- Barra de búsqueda -->
+        <div class="search-bar">
+          <div class="search-input-container">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input 
+              type="text" 
+              placeholder="Buscar certificaciones..." 
+              class="search-input"
+              [(ngModel)]="searchTerm"
+              (input)="onSearch()"
+            >
+          </div>
+        </div>
+
+        <!-- Tabla de certificaciones -->
+        <div class="table-container">
+          <table class="certifications-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Curso</th>
+                <th>Detalles</th>
+                <th>Caducidad</th>
+                <th>Horas</th>
+                <th>Adjuntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let certification of filteredCertifications">
+                <td class="certification-name">{{ certification.name }}</td>
+                <td class="course">{{ certification.course }}</td>
+                <td class="details">{{ certification.details }}</td>
+                <td class="expiration">{{ certification.expiration }}</td>
+                <td class="hours">{{ certification.hours }}</td>
+                <td class="attachments">
+                  <div class="attachment-actions">
+                    <button class="action-btn profile" title="Mi perfil">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </button>
+                    <button class="action-btn certificate" title="Certificado">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                        <polyline points="14,2 14,8 20,8"></polyline>
+                      </svg>
+                    </button>
+                    <button class="action-btn edit" title="Ver/Editar" (click)="editCertification(certification)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="m18.5 2.5 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </button>
+                    <button class="action-btn delete" title="Eliminar" (click)="deleteCertification(certification)">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6"></polyline>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+          <div class="pagination-info">
+            <span>Mostrar por página</span>
+            <select class="page-size-select" [(ngModel)]="pageSize" (change)="onPageSizeChange()">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="25">25</option>
+            </select>
+          </div>
+          <div class="pagination-controls">
+            <span class="page-info">{{ getPageInfo() }}</span>
+            <button class="pagination-btn" [disabled]="currentPage === 1" (click)="previousPage()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+            </button>
+            <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

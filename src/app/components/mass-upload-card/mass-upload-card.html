@@ -1,0 +1,41 @@
+<div class="mass-upload-card">
+  <div class="card-header">
+    <h3 class="card-title">CARGA MASIVA</h3>
+  </div>
+  
+  <div class="card-content">
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Cargando datos</p>
+    </div>
+    
+    <div *ngIf="!isLoading" class="upload-state">
+      <div class="file-input-container">
+        <input 
+          type="file" 
+          id="fileInput" 
+          class="file-input" 
+          (change)="onFileSelected($event)"
+          accept=".xlsx,.xls,.csv"
+        >
+        <label for="fileInput" class="file-input-label">
+          <span class="file-name">{{ selectedFileName || 'Seleccionar archivo' }}</span>
+          <div class="file-actions">
+            <svg *ngIf="selectedFileName" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" (click)="clearFile()">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </label>
+      </div>
+      
+      <button class="upload-btn" [disabled]="!selectedFileName" (click)="uploadFile()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M17 8L12 3L7 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 3V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Enviar
+      </button>
+    </div>
+  </div>
+</div>
